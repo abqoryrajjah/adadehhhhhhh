@@ -6,14 +6,14 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBDGtmOfCrG5fLvB0JmICX-7V0swGoNC84",
-  authDomain: "monitoringplants.firebaseapp.com",
-  databaseURL: "https://monitoringplants-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "monitoringplants",
-  storageBucket: "monitoringplants.firebasestorage.app",
-  messagingSenderId: "969663345310",
-  appId: "1:969663345310:web:b5c47c15a3ff864d0c818f",
-  measurementId: "G-H3BF6XTN9K"
+  apiKey: "AIzaSyA1LPnD7ITEveZ6LiD-aYxVnH6VAgnBAqs",
+  authDomain: "monitor-ketuaa.firebaseapp.com",
+  databaseURL: "https://monitor-ketuaa-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "monitor-ketuaa",
+  storageBucket: "monitor-ketuaa.firebasestorage.app",
+  messagingSenderId: "49397842909",
+  appId: "1:49397842909:web:af2a8606ef127c5388ac34",
+  measurementId: "G-0KSLVWEX01"
 };
 
 
