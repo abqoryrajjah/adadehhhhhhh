@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitoring IoT - Sensor</title>
+   <link rel="stylesheet" href="CSS/sensor.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#f4f5f9;
+      display:flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar{
+      width:260px;
+      height:100vh;
+      background:#071028;
+      color:white;
+      padding:30px 20px;
+      position:fixed;
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:bold;
+      margin-bottom:50px;
+    }
+
+    .logo span{
+      color:#7b61ff;
+    }
+
+    .menu{
+      list-style:none;
+    }
+
+    .menu li{
+      margin:18px 0;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:#cfd6e4;
+      display:block;
+      padding:14px 18px;
+      border-radius:14px;
+      transition:0.3s;
+      font-size:18px;
+    }
+
+    .menu a:hover,
+    .menu .active{
+      background:linear-gradient(90deg,#7b2ff7,#00c6ff);
+      color:white;
+    }
+
+    .logout{
+      position:absolute;
+      bottom:30px;
+      color:#ff5e5e;
+    }
+
+    /* MAIN */
+    .main{
+      margin-left:260px;
+      padding:35px;
+      width:100%;
+    }
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+    }
+
+    .header h1{
+      font-size:42px;
+      color:#111827;
+    }
+
+    .status{
+      background:white;
+      padding:12px 20px;
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .dot{
+      width:12px;
+      height:12px;
+      background:#19c37d;
+      border-radius:50%;
+    }
+
+    /* SENSOR CARDS */
+    .sensor-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .card{
+      padding:25px;
+      border-radius:22px;
+      color:white;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .card h3{
+      font-size:18px;
+      margin-bottom:15px;
+    }
+
+    .card h2{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    .purple{
+      background:linear-gradient(135deg,#5f2cff,#7b61ff);
+    }
+
+    .blue{
+      background:linear-gradient(135deg,#00b4db,#3a7bd5);
+    }
+
+    .orange{
+      background:linear-gradient(135deg,#f7971e,#ff512f);
+    }
+
+    .green{
+      background:linear-gradient(135deg,#00b894,#00cec9);
+    }
+
+    /* DETAIL SECTION */
+    .content{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:25px;
+    }
+
+    .panel{
+      background:white;
+      border-radius:22px;
+      padding:25px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .panel h2{
+      margin-bottom:20px;
+      color:#111827;
+    }
+
+    /* TABLE */
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    table th,
+    table td{
+      padding:16px;
+      text-align:left;
+      border-bottom:1px solid #eee;
+    }
+
+    table th{
+      color:#666;
+    }
+
+    .online{
+      color:#19c37d;
+      font-weight:bold;
+    }
+
+    .offline{
+      color:#ff4d4d;
+      font-weight:bold;
+    }
+
+    /* ALERT */
+    .alert{
+      background:#fff4f4;
+      border-left:5px solid #ff4d4d;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:15px;
+    }
+
+    .alert.warning{
+      background:#fff8e8;
+      border-left:5px solid orange;
+    }
+
+    /* BUTTON */
+    .btn-group{
+      margin-top:20px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      padding:12px 18px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      color:white;
+      font-weight:bold;
+    }
+
+    .btn-blue{
+      background:#3a7bd5;
+    }
+
+    .btn-green{
+      background:#00b894;
+    }
+
+    .btn-red{
+      background:#ff4d4d;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="logo">
+      Monitoring<span>IoT</span>
+    </div>
+
+    <ul class="menu">
+      <li><a href="dashboard.html">📊 Dashboard</a></li>
+      <li><a class="active" href="#">🌡 Sensor</a></li>
+      <li><a href="riwayat.html">📈 Riwayat</a></li>
+      <li><a href="#">⚙ Pengaturan</a></li>
+    </ul>
+
+    <div class="logout">
+      ⬅ Keluar
+    </div>
+
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="header">
+      <div>
+        <h1>Halaman Sensor</h1>
+        <p>Pantau detail sensor IoT Anda secara real-time.</p>
+      </div>
+
+      <div class="status">
+        <div class="dot"></div>
+        Terhubung
+      </div>
+    </div>
+
+    <!-- SENSOR CARDS -->
+    <div class="sensor-grid">
+
+      <div class="card purple">
+        <h3>Suhu</h3>
+        <h2>27.4°C</h2>
+        <p>Status Normal</p>
+      </div>
+
+      <div class="card blue">
+        <h3>Kelembapan</h3>
+        <h2>68%</h2>
+        <p>Udara Stabil</p>
+      </div>
+
+      <div class="card orange">
+        <h3>Tekanan</h3>
+        <h2>1012 hPa</h2>
+        <p>Turun Tipis</p>
+      </div>
+
+      <div class="card green">
+        <h3>Cahaya</h3>
+        <h2>540 lx</h2>
+        <p>Ruangan Cerah</p>
+      </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- LEFT -->
+      <div class="panel">
+
+        <h2>Daftar Sensor</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Sensor</th>
+              <th>Lokasi</th>
+              <th>Update</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>DHT22</td>
+              <td>Ruang 1</td>
+              <td>2 detik lalu</td>
+              <td class="online">Online</td>
+            </tr>
+
+            <tr>
+              <td>LDR Sensor</td>
+              <td>Lab IoT</td>
+              <td>5 detik lalu</td>
+              <td class="online">Online</td>
+            </tr>
+
+            <tr>
+              <td>BMP280</td>
+              <td>Ruang Server</td>
+              <td>1 menit lalu</td>
+              <td class="offline">Offline</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="btn-group">
+          <button class="btn-blue">Refresh Data</button>
+          <button class="btn-green">Tambah Sensor</button>
+          <button class="btn-red">Restart Sensor</button>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="panel">
+
+        <h2>Notifikasi</h2>
+
+        <div class="alert">
+          Sensor BMP280 tidak merespon.
+        </div>
+
+        <div class="alert warning">
+          Suhu Ruang 1 meningkat.
+        </div>
+
+        <div class="alert">
+          Sinkronisasi gagal pada Sensor B.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
